@@ -39,20 +39,14 @@ public class AlumnoServices {
 	}
 	
 	
-	public void deleteAlumno(int codigo) {
-		Alumno alumnoAEliminar = getAlumnoByCodigo(codigo);
-		
-		if(alumnoAEliminar == null) {
-			System.out.println("EL ALUMNO NO EXISTE");
-			return;
-		}
+	public boolean deleteAlumno(Alumno alumnoAEliminar) {
 		
 		if(alumnoAEliminar.getEstado().getCodigo() != 0) {
-			System.out.println("EL ALUMNO NO PUEDE SER ELIMINADO");
-			return;
+			return false;
 		}
 		
 		alumnos.remove(alumnoAEliminar);
+		return true;
 	}
 	
 	

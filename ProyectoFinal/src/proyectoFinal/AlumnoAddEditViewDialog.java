@@ -14,6 +14,7 @@ import javax.swing.JTextField;
 
 import constants.Estado;
 import models.Alumno;
+import models.Curso;
 import services.AlumnoServices;
 import helpers.ElementsHelpers;
 
@@ -150,18 +151,50 @@ public class AlumnoAddEditViewDialog extends JDialog {
 		comboBoxAlumno.setBounds(110, 7, 142, 26);
 		getContentPane().add(comboBoxAlumno);
 		
+		JButton btnGrabar = new JButton("Grabar");
+		btnGrabar.setBounds(300, 7, 105, 27);
+		getContentPane().add(btnGrabar);
 		
 		// Modo: 1- add, 2-view, 3-edit
 		if (modo == 2) {
-			setTitle("Consultar Alumno");
-		} else if(modo == 1 || modo == 3){
 			
+			setTitle("Consultar Alumno");
+			btnGrabar.setVisible(false);
+			
+		} else if (modo == 4){
+			
+			setTitle("Eliminar Alumno");
+			btnGrabar.setText("Eliminar");
+			btnGrabar.addActionListener(new ActionListener() {
+				
+				@Override
+				public void actionPerformed(ActionEvent e) {
+					Alumno alumnoSeleccionado;
+					alumnoSeleccionado = (Alumno) ElementsHelpers.getComboboxObject(comboBoxAlumno);
+					
+					int respuesta = JOptionPane.showConfirmDialog(
+							null, "¿Estás seguro que deseas eliminar el alumno?",
+							"Confirmación", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+					if (respuesta == JOptionPane.YES_OPTION) {
+						boolean eliminado = alumnoServices.deleteAlumno(alumnoSeleccionado);;
+						if (eliminado) {
+							JOptionPane.showMessageDialog(null, "El alumno fue eliminado correctamente", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+							dispose();
+						} else {
+							JOptionPane.showMessageDialog(null, "El alumno no puede ser eliminado", "Error", JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}
+			});
+			
+		} else {
+			btnGrabar.setVisible(true);
 			txtNombres.setEditable(true);
 			txtApellidos.setEditable(true);
 			txtEdad.setEditable(true);
 			txtCelular.setEditable(true);
 			//txtEstado.setEditable(true);
-			JButton btnGrabar = new JButton("Grabar");
+			
 			
 			if(modo == 1) {
 				setTitle("Agregar Alumno");
@@ -174,7 +207,6 @@ public class AlumnoAddEditViewDialog extends JDialog {
 			} else {
 				setTitle("Modificar Alumno");
 				comboBoxEstado.setEnabled(true);
-				btnGrabar.setBounds(300, 7, 105, 27);
 			}
 			
 
@@ -242,7 +274,6 @@ public class AlumnoAddEditViewDialog extends JDialog {
 
 				}
 			});
-			getContentPane().add(btnGrabar);
 		}
 	}
 
