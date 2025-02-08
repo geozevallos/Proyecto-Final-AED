@@ -10,6 +10,14 @@ public class ElementsHelpers {
 		return comboBox.getSelectedItem();
 	}
 	
+	public static int getComboBoxIndex(JComboBox comboBox) {
+		return comboBox.getSelectedIndex();
+	}
+	
+	public static void setSelectedIndex(JComboBox comboBox, int index) {
+		comboBox.setSelectedIndex(index);
+	}
+	
 	public static void setTextFieldValue(JTextField txtField, Object value) {
 		if (value == null) {
 			txtField.setText("");

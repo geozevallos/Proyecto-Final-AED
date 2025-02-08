@@ -12,6 +12,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import services.AlumnoServices;
+import services.CursosServices;
 
 public class proyectoFinalUI extends JFrame {
 
@@ -19,6 +20,7 @@ public class proyectoFinalUI extends JFrame {
 	private JPanel contentPane;
 	
 	public AlumnoServices alumnoServices = new AlumnoServices();
+	public CursosServices cursoServices = new CursosServices();
 
 	/**
 	 * Launch the application.
@@ -57,6 +59,8 @@ public class proyectoFinalUI extends JFrame {
 		JMenu menuMantenimiento = new JMenu("Mantenimiento");
 		menuPrincipal.add(menuMantenimiento);
 		
+		
+		// Alumno --------------------------------------
 		JMenu subMenuMantenimientoAlumno = new JMenu("Alumno");
 		menuMantenimiento.add(subMenuMantenimientoAlumno);
 		
@@ -65,9 +69,9 @@ public class proyectoFinalUI extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				AlumnoAddEditViewDialog AlumnoViewDialog = new AlumnoAddEditViewDialog(alumnoServices, 1);
-				AlumnoViewDialog.setLocationRelativeTo(proyectoFinalUI.this);
-				AlumnoViewDialog.setVisible(true);
+				AlumnoAddEditViewDialog AlumnoAddDialog = new AlumnoAddEditViewDialog(alumnoServices, 1);
+				AlumnoAddDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				AlumnoAddDialog.setVisible(true);
 			}
 		});
 		subMenuMantenimientoAlumno.add(itemMantenimientoAlumnoAdd);
@@ -100,21 +104,67 @@ public class proyectoFinalUI extends JFrame {
 		subMenuMantenimientoAlumno.add(itemMantenimientoAlumnoEdit);
 		
 		JMenuItem itemMantenimientoAlumnoDelete = new JMenuItem("Eliminar");
+		itemMantenimientoAlumnoDelete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				AlumnoAddEditViewDialog AlumnoDeleteDialog = new AlumnoAddEditViewDialog(alumnoServices, 4);
+				AlumnoDeleteDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				AlumnoDeleteDialog.setVisible(true);
+			}
+		});
 		subMenuMantenimientoAlumno.add(itemMantenimientoAlumnoDelete);
 		
 		JMenu subMenuMantenimientoCurso = new JMenu("Curso");
 		menuMantenimiento.add(subMenuMantenimientoCurso);
 		
 		JMenuItem itemMantenimientoCursoAdd = new JMenuItem("Adicionar");
+		itemMantenimientoCursoAdd.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CursoAddEditViewDeleteDialog CursoAddDialog = new CursoAddEditViewDeleteDialog(cursoServices, 1);
+				CursoAddDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				CursoAddDialog.setVisible(true);
+			}
+		});
+
 		subMenuMantenimientoCurso.add(itemMantenimientoCursoAdd);
 		
 		JMenuItem itemMantenimientoCursoGet = new JMenuItem("Consultar");
+		itemMantenimientoCursoGet.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CursoAddEditViewDeleteDialog CursoViewDialog = new CursoAddEditViewDeleteDialog(cursoServices, 2);
+				CursoViewDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				CursoViewDialog.setVisible(true);
+			}
+		});
 		subMenuMantenimientoCurso.add(itemMantenimientoCursoGet);
 		
 		JMenuItem itemMantenimientoCursoEdit = new JMenuItem("Editar");
+		itemMantenimientoCursoEdit.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CursoAddEditViewDeleteDialog CursoEditDialog = new CursoAddEditViewDeleteDialog(cursoServices, 3);
+				CursoEditDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				CursoEditDialog.setVisible(true);	
+			}
+		});
 		subMenuMantenimientoCurso.add(itemMantenimientoCursoEdit);
 		
 		JMenuItem itemMantenimientoCursoDelete = new JMenuItem("Eliminar");
+		itemMantenimientoCursoDelete.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				CursoAddEditViewDeleteDialog CursoDeleteDialog = new CursoAddEditViewDeleteDialog(cursoServices, 4);
+				CursoDeleteDialog.setLocationRelativeTo(proyectoFinalUI.this);
+				CursoDeleteDialog.setVisible(true);	
+			}
+		});
 		subMenuMantenimientoCurso.add(itemMantenimientoCursoDelete);
 		
 		// Registro ---------------------------------
